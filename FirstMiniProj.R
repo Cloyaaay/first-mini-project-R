@@ -18,3 +18,23 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
 #pollutantmean("insert your path here", "sulfate", 1:10)
 #pollutantmean("insert your path here", "nitrate", 70:72)
 #pollutantmean("insert your path here", "nitrate", 23)
+
+#Problem 2
+
+complete <- function(directory, id= 1:332) {
+  myfiles <- list.files(directory, full.names = TRUE) #Make a list of all csv files
+  nobs <- numeric() #create a numeric vector for no. of observations
+  
+  for (i in id){
+    dt <- read.csv(myfiles[i]) #read each file in the list every loop and save it
+    sumdt <- sum(complete.cases(dt)) #compute sum of all complete cases in a file
+    nobs <- c(nobs, sumdt) #save sum of that file here
+  }
+  return (data.frame(id, nobs)) #return a data frame which shows id and no. of observations
+}
+
+#Run the ff commands in the console in RStudio to check for the outputs
+#complete("insert path here", 1)
+#complete("insert path here", c(2, 4, 8, 10, 12))
+#complete("insert path here", 30:25)
+#complete("insert path here", 3)
