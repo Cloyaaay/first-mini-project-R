@@ -38,3 +38,24 @@ complete <- function(directory, id= 1:332) {
 #complete("insert path here", c(2, 4, 8, 10, 12))
 #complete("insert path here", 30:25)
 #complete("insert path here", 3)
+
+#Problem 3
+
+corr <- function(directory, threshold = 0){
+  myfiles <- list.files(directory, full.names = TRUE) #Make a list of all csv files
+  compcases <- complete(directory) #use complete() function to return a data frame of the files
+  id <- compcases[compcases["nobs"] > threshold, ]$id #subset the ids or files that have observations greater than the threshold
+  corrtable <- data.frame() #data frame to store the corr values
+  
+  for (i in id){ #loop in the ids with nobs greater than the threshold
+    dt <- read.csv(myfiles[i]) #read each file
+    ccfile <- dt[complete.cases(data), ] #get complete cases in that file
+    corrtable <- c(corrtable, cor(ccfile$sulfate, ccfile$nitrate)) #get correlation of the complete cases in that file
+  }
+  return (corrtable)
+}
+
+#Run the ff commands in the console in RStudio to check for the outputs
+#cr<-corr("insert path here", 150)
+#head(cr)
+#summary(cr)
