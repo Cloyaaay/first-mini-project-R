@@ -1,1 +1,1 @@
-# first-mini-project-R
+This is the first mini project in R for CMSC 197-2
