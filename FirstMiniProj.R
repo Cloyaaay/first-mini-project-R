@@ -59,3 +59,17 @@ corr <- function(directory, threshold = 0){
 #cr<-corr("insert path here", 150)
 #head(cr)
 #summary(cr)
+
+#Problem 4
+
+outcome <- read.csv("outcome-of-care-measures.csv", colClasses="character")
+head(outcome)
+outcome[, 11] <- as.numeric(outcome[, 11])
+
+#Just added some attributes for hist, main for the title, xlab for the label, col for changing color
+hist(outcome[, 11],
+  main="Hospital 30-day Mortality(Death) Rates from Heart Attack", 
+  xlab="Deaths", 
+  col="lightblue")
+
+#Run the script in the directory of your data files
